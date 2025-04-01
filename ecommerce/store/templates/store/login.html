@@ -1,0 +1,57 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+     <div class="row">
+		<div class="col-lg-6">
+			<div class="box-element" id="form-wrapper">
+				<form id="form" method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+					<h3>Login to Your Account</h3>
+					<hr>
+					<div id="user-info">
+						<div class="form-field">
+							{{ form.username }}
+						</div>
+						<div class="form-field">
+							{{ form.password }}
+						</div>
+					</div>
+
+					<hr>
+					<input id="form-button" class="btn btn-success btn-block" type="submit" value="Login">
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger mt-2">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="mt-3">
+                        <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+{#                        <p>Forgot password? <a href="{% url 'password_reset' %}">Reset it</a></p>#}
+                    </div>
+				</form>
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<div class="box-element">
+				<a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Back to Store</a>
+				<hr>
+				<h3>Why Login?</h3>
+				<hr>
+				<ul class="list-unstyled">
+					<li class="mb-2"><i class="fas fa-check text-success"></i> Track your orders</li>
+					<li class="mb-2"><i class="fas fa-check text-success"></i> Faster checkout</li>
+					<li class="mb-2"><i class="fas fa-check text-success"></i> Save your shipping info</li>
+					<li class="mb-2"><i class="fas fa-check text-success"></i> View order history</li>
+					<li class="mb-2"><i class="fas fa-check text-success"></i> Get exclusive offers</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

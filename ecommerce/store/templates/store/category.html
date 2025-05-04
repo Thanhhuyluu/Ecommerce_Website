@@ -1,0 +1,105 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+ <section>
+        <div class="container">
+            <div class="category-page">
+              <aside class="sidebar">
+                <h2>Filters</h2>
+
+                <div class="filter-group">
+                  <h4>Category</h4>
+                  <ul>
+                    <li>T-shirts</li>
+                    <li>Shorts</li>
+                    <li>Shirts</li>
+                    <li>Hoodie</li>
+                    <li>Jeans</li>
+                  </ul>
+                </div>
+
+                <div class="filter-group">
+                  <h4>Price</h4>
+                  <input type="range" min="50" max="200">
+                  <p>$50 - $200</p>
+                </div>
+
+                <div class="filter-group">
+                  <h4>Colors</h4>
+                  <div class="color-options">
+                    <span style="background: #f44336;"></span>
+                    <span style="background: #ff9800;"></span>
+                    <span style="background: #ffeb3b;"></span>
+                    <span style="background: #4caf50;"></span>
+                    <span style="background: #2196f3;"></span>
+                    <span style="background: #9c27b0;"></span>
+                    <span style="background: #000;"></span>
+                    <span style="background: #fff; border: 1px solid #ccc;"></span>
+                  </div>
+                </div>
+
+                <div class="filter-group">
+                  <h4>Size</h4>
+                  <div class="size-options">
+                    <button>XX-Small</button>
+                    <button>X-Small</button>
+                    <button>Small</button>
+                    <button class="active">Large</button>
+                    <button>X-Large</button>
+                    <button>4X-Large</button>
+                  </div>
+                </div>
+
+                <div class="filter-group">
+                  <h4>Dress Style</h4>
+                  <ul>
+                    <li>Casual</li>
+                    <li>Formal</li>
+                    <li>Party</li>
+                    <li>Gym</li>
+                  </ul>
+                </div>
+
+                <button class="filter-button">Apply Filter</button>
+              </aside>
+
+              <main class="product-section">
+                <div class="product-header">
+                  <h1>Casual</h1>
+                  <div class="sort">
+                    <label>Sort by:</label>
+                    <select>
+                      <option>Most Popular</option>
+                      <option>Lowest Price</option>
+                      <option>Highest Rated</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="product-grid">
+                  <!-- Repeat product item -->
+                  <div class="product-card">
+                    <img src="../images/shirt.webp" alt="Product">
+                    <h3 class="product-name">Gradient Graphic T-shirt</h3>
+                    <div class="product-price">$145</div>
+                      <button data-product={{product.id}} data-action="add" class="btn-add-cart">Thêm vào giỏ</button>
+                  </div>
+                  <!-- Add more items... -->
+                </div>
+
+                <div class="pagination">
+                  <button>Previous</button>
+                  <div class="page-numbers">
+                    <button class="active">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <span>...</span>
+                    <button>10</button>
+                  </div>
+                  <button>Next</button>
+                </div>
+              </main>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

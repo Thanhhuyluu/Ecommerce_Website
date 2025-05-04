@@ -1,0 +1,45 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+    <section>
+        <div class="container">
+        <!-- Register Form -->
+            <div class="auth-container">
+              <div class="auth-box" id="form-wrapper">
+                <h2>Create Account</h2>
+                <p>Sign up to get started</p>
+                <form id="form" method="POST" action="{% url 'register' %}">
+                    {% csrf_token %}
+                  <label>Username</label>
+                  {{ form.username }}
+
+                  <label>Name</label>
+                  {{ form.name }}
+
+                  <label>Email</label>
+                  {{ form.email }}
+
+                  <label>Password</label>
+                  {{ form.password1 }}
+
+                  <label>Confirm Password</label>
+                  {{ form.password2 }}
+
+                  <button type="submit" id="form-button">Register</button>
+
+                   {% if form.errors %}
+                        <div class="alert alert-danger mt-2">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </form>
+                <p class="auth-switch">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+              </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

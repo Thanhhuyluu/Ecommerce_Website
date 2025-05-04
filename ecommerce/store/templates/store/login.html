@@ -1,0 +1,37 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+    <section>
+        <div class="container">
+
+            <div class="auth-container">
+              <div class="auth-box" id="form-wrapper">
+                <h2>Welcome Back</h2>
+                <p>Login to your account</p>
+                <form id="form" method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                <div id="user-info">
+                  <label>Email</label>
+                  {{ form.username }}
+
+                  <label>Password</label>
+                    {{ form.password }}
+                </div>
+                  <button id="form-button" type="submit">Login</button>
+                    {% if form.errors %}
+                        <div class="alert alert-danger mt-2">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+{#               <p>Forgot password? <a href="{% url 'password_reset' %}">Reset it</a></p>#}
+              </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

@@ -3,9 +3,12 @@
 {% load static %}
 <html>
 <head>
-	<title>Ecom</title>
+	<title>Shopping</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -31,43 +34,138 @@
 		}
 		var csrftoken = getToken('csrftoken')
 
-
 	</script>
 </head>
 <body>
+    <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+          <div class="container">
+            <a class="navbar-brand font-weight-bold" href="{% url 'store' %}">Shopping</a>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand" href="{% url 'store' %}">Ecom</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
+            <!-- Toggle button for mobile -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="{% url 'store' %}">Store <span class="sr-only">(current)</span></a>
-	      </li>
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarNav">
 
-	    </ul>
-	    <div class="form-inline my-2 my-lg-0">
-	     	<a href="#"class="btn btn-warning">Login</a>
+              <!-- Search form: sẽ xuống dòng trên mobile -->
+              <form class="form-inline my-3 my-lg-0 w-50 order-2 order-lg-1">
+                <input class="form-control w-100" type="search" placeholder="Search for products..." aria-label="Search">
+              </form>
 
-	     	<a href="{% url 'cart' %}">
-	    		<img  id="cart-icon" src="{% static 'images/cart.png' %}">
-	    	</a>
-	    	<p id="cart-total">{{cartItems}}</p>
+              <!-- Right-side nav items -->
+              <ul class="navbar-nav align-items-center ml-auto order-1 order-lg-2">
+                {% if user.is_authenticated %}
+                  <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-circle"></i></a></li>
+                  <span class="navbar-text">{{ user.username }}!</span>
+                  <li class="nav-item mr-2">
+                    <a class="btn btn-outline-dark btn-sm ml-2" href="{% url 'logout' %}">Đăng xuất</a>
+                  </li>
+                {% else %}
+                  <li class="nav-item mr-2">
+                    <a class="btn btn-outline-dark btn-sm" href="{% url 'login' %}">Đăng nhập</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn btn-dark btn-sm" href="{% url 'register' %}">Đăng ký</a>
+                  </li>
+                {% endif %}
+                <li class="nav-item mr-2">
+                  <a class="nav-link position-relative" href="{% url 'cart' %}">
+                    <i id="cart-icon" class="fas fa-shopping-cart"></i>
+                    <span id="cart-total"
+                          class="badge badge-pill badge-danger position-absolute"
+                          style="top: -5px; right: -10px;">
+                      {{cartItems}}
+                    </span>
+                  </a>
+                </li>
+              </ul>
 
-	    </div>
-	  </div>
-	</nav>
-
-     <div class="container">
-            <br>
-            {% block content %}
+            </div>
+          </div>
+        </nav>
 
 
-            {% endblock content %}
-         </div>
+
+        {% block content %}
+
+        {% endblock content %}
+
+    <footer class="footer">
+      <div class="newsletter">
+        <h2>STAY UPTO DATE ABOUT<br>OUR LATEST OFFERS</h2>
+        <div class="newsletter-input">
+          <input type="email" placeholder="Enter your email address">
+          <button>Subscribe to Newsletter</button>
+        </div>
+      </div>
+
+      <div class="footer-main">
+        <div class="footer-section logo">
+          <h3>SHOPPING</h3>
+          <p>We have clothes that suits your style and which you're proud to wear. From women to men.</p>
+          <div class="social-icons">
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-github"></i>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h4>COMPANY</h4>
+          <ul>
+            <li>About</li>
+            <li>Features</li>
+            <li>Works</li>
+            <li>Career</li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>HELP</h4>
+          <ul>
+            <li>Customer Support</li>
+            <li>Delivery Details</li>
+            <li>Terms & Conditions</li>
+            <li>Privacy Policy</li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>FAQ</h4>
+          <ul>
+            <li>Account</li>
+            <li>Manage Deliveries</li>
+            <li>Orders</li>
+            <li>Payments</li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>RESOURCES</h4>
+          <ul>
+            <li>Free eBooks</li>
+            <li>Development Tutorial</li>
+            <li>How to - Blog</li>
+            <li>Youtube Playlist</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>Shop.co © 2000-2023, All Rights Reserved</p>
+        <div class="payment-icons">
+          <img src="#" alt="Visa">
+          <img src="#" alt="Mastercard">
+          <img src="#" alt="Paypal">
+      <img src="#" alt="Apple Pay">
+          <img src="#" alt="Google Pay">
+        </div>
+      </div>
+    </footer>
 
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

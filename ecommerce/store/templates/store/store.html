@@ -2,19 +2,72 @@
 {% load static %}
 
 {% block content %}
-    <div class="row">
-        {% for product in products %}
-        <div class="col-lg-4">
-            <img class="thumbnail" src="{{product.imageURL}}">
-            <div class="box-element product">
-                <h6><strong>{{product.name}}</strong></h6>
-                <hr>
 
-                <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-                <a class="btn btn-outline-success" href="#">View</a>
-                <h4 style="display: inline-block; float: right"><strong>${{product.price|floatformat:2}}</strong></h4>
+    <section class="hero-section text-center text-md-left d-flex align-items-center img-home">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-md-6 hero-text py-5">
+                <h1 class="display-4 font-weight-bold">FIND CLOTHES<br>THAT MATCH<br>YOUR STYLE</h1>
+                <p class="lead mt-3">Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.</p>
+                <a href="#" class="btn btn-dark btn-lg mt-3">Shop Now</a>
+
+                <!-- Stats Row -->
+                <div class="row mt-4 text-center text-md-left">
+                  <div class="col-12 col-md-4 stats mb-3 mb-md-0">
+                    <h5>200+</h5>
+                    <small>International Brands</small>
+                  </div>
+                  <div class="col-12 col-md-4 stats mb-3 mb-md-0">
+                    <h5>2,000+</h5>
+                    <small>High-Quality Products</small>
+                  </div>
+                  <div class="col-12 col-md-4 stats">
+                    <h5>30,000+</h5>
+                    <small>Happy Customers</small>
+                  </div>
+                </div>
+
+              </div>
             </div>
+          </div>
+        </section>
+
+
+   <section class="category">
+      <div class="container">
+        <h3 class="title">DANH MỤC</h3>
+        <div class="grid">
+          <div class="item">
+            <img src="../images/shirt.webp" alt="Thời Trang Nam">
+            <p>Thời Trang Nam</p>
+          </div>
+          <div class="item">
+            <img src="../images/book.webp" alt="Sách">
+            <p>Sách</p>
+          </div>
+          <div class="item">
+            <img src="../images/shoes.webp" alt="Giày">
+            <p>Giày</p>
+          </div>
         </div>
-        {% endfor %}
-    </div>
+      </div>
+    </section>
+
+    <section class="new-arrivals">
+      <div class="container">
+        <h3 class="title">GỢI Ý HÔM NAY</h3>
+        <div class="product-grid">
+            {% for product in products %}
+              <div class="product-card">
+                <img src="{{product.imageURL}}" alt="{{product.name}}">
+                <h4 class="product-name">{{product.name}}</h4>
+                <p class="product-price">${{product.price}}</p>
+                <button data-product={{product.id}} data-action="add" class="btn-add-cart update-cart">Thêm vào giỏ</button>
+              </div>
+            {% endfor %}
+        </div>
+      </div>
+    </section>
+
+
 {% endblock content %}

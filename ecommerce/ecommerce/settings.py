@@ -133,3 +133,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_REDIRECT_URL = 'store'  # Trang chuyển hướng sau khi login thành công
+LOGOUT_REDIRECT_URL = 'store'  # Trang chuyển hướng sau khi logout
+
